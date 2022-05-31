@@ -60,7 +60,7 @@ def solveRecursive(board, depth):
             if deepBoardResult is not None:
                 return deepBoardResult
         updatedBoard = updateBoard(board, y, x, 0) # revert update, required because python is dumb (it created updatedBoard variable in function scope)
-    return None # not value is valid for this cell, must have some problem previously, back track
+    return None # no value is valid for this cell, must have some problem previously, back track
 
 def solve(board):
     solvedBoard = solveRecursive(board, 0)
