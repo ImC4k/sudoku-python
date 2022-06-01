@@ -1,8 +1,9 @@
 from copy import copy
 
-boardSize = 9
-emptyToken = 0
+cellSize = 2
+boardSize = cellSize * cellSize
 endDepth = boardSize * boardSize
+emptyToken = 0
 
 def isRowValid(board, y, x, val):
     row = board[y]
@@ -13,12 +14,7 @@ def isColumnValid(board, y, x, val):
     return val not in column
 
 def getGroupIndex(i):
-    if i < 3:
-        return [0, 1, 2]
-    elif i < 6:
-        return [3, 4, 5]
-    else:
-        return [6, 7, 8]
+    return list(range((i // cellSize) * cellSize, (i // cellSize + 1) * cellSize)) 
 
 def isAreaValid(board, y, x, val):
     yGroup = getGroupIndex(y)
@@ -102,6 +98,13 @@ board = [
     [0, 0, 0, 6, 5, 0, 0, 0, 0]
 ]
 
+# board = [
+#     [0, 2, 3, 0],
+#     [3, 0, 1, 2],
+#     [2, 1, 0, 0],
+#     [0, 3, 2, 1]
+# ]
+
 solve(board)
 
 # # solution
@@ -115,4 +118,11 @@ solve(board)
 #     [2, 9, 6, 1, 7, 8, 5, 4, 3],
 #     [5, 8, 1, 9, 4, 3, 6, 2, 7],
 #     [7, 4, 3, 6, 5, 2, 1, 9, 8]
+# ]
+
+# board = [
+#     [1, 2, 3, 4],
+#     [3, 4, 1, 2],
+#     [2, 1, 4, 3],
+#     [4, 3, 2, 1]
 # ]
