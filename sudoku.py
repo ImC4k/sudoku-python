@@ -63,20 +63,19 @@ def solveRecursive(board, depth):
     return None # no value is valid for this cell, must have some problem previously, back track
 
 def validate(board):
-    testBoard = copy(board)
     for y in range(boardSize):
         for x in range(boardSize):
             if board[y][x] == emptyToken:
                 continue
+
+            val = board[y][x]
+            board[y][x] = emptyToken
+            if isCellValid(board, y, x, val):
+                board[y][x] = val
+                continue
             else:
-                val = testBoard[y][x]
-                testBoard[y][x] = emptyToken
-                if isCellValid(testBoard, y, x, val):
-                    testBoard[y][x] = val
-                    continue
-                else:
-                    print(f'Board is invalid: first violation at position x={x} y={y}')
-                    return False
+                print(f'Board is invalid: first violation at position x={x} y={y}')
+                return False
     return True
 
 def solve(board):
