@@ -62,7 +62,27 @@ def solveRecursive(board, depth):
         updatedBoard = updateBoard(board, y, x, 0) # revert update, required because python is dumb (it created updatedBoard variable in function scope)
     return None # no value is valid for this cell, must have some problem previously, back track
 
+def validate(board):
+    testBoard = copy(board)
+    for y in range(boardSize):
+        for x in range(boardSize):
+            if board[y][x] == emptyToken:
+                continue
+            else:
+                val = testBoard[y][x]
+                testBoard[y][x] = emptyToken
+                if isCellValid(testBoard, y, x, val):
+                    testBoard[y][x] = val
+                    continue
+                else:
+                    print(f'Board is invalid: first violation at position x={x} y={y}')
+                    return False
+    return True
+
 def solve(board):
+    isBoardValid = validate(board)
+    if not isBoardValid:
+        return
     solvedBoard = solveRecursive(board, 0)
 
     if solvedBoard is None:
